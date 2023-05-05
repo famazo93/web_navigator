@@ -1,14 +1,18 @@
 const Stack = require('./Stack.js');
 const prompt = require('prompt-sync')();
+
 // ------------------------------
 // Initialization
 // ------------------------------
+
 const backPages = new Stack();
 const nextPages = new Stack();
 let currentPage = 'www.codecademy.com'
+
 // ------------------------------
 // Helper Functions
 // ------------------------------
+
 const showCurrentPage = (action) => {
   console.log(`\n${action}`);
   console.log(`Current page = ${currentPage}`);
@@ -45,6 +49,7 @@ const nextPage = () => {
 /*
  * The following strings are used to prompt the user
  */
+
 const baseInfo = '\nEnter a url';
 const backInfo = 'B|b for back page';
 const nextInfo = 'N|n for next page';
@@ -54,6 +59,7 @@ const question = 'Where would you like to go today? '
 // ------------------------------
 // User Interface Part 1
 // ------------------------------
+
 let showNext = false;
 let showBack = false;
 
@@ -83,31 +89,29 @@ const input = () => {
   const lowerCaseInput = userInput.toLowerCase();
   return lowerCaseInput;
 };
+
   // ------------------------------
   // User Interface Part 2
   // ------------------------------
+
 let finish = false;
 while (!finish) {
   let lowerCaseAnswer = input();
 
   if (lowerCaseAnswer === 'b' || lowerCaseAnswer === 'n' || lowerCaseAnswer === 'q') {
     if (lowerCaseAnswer === 'b') {
-      if (backPages) {
+      if (backPages.peek() !== null) {
         backPage()
-        lowerCaseAnswer = input();
         } else {
           console.log('Unfortunately you cannot go back.')
-          lowerCaseAnswer = input();
         };
     };
 
     if (lowerCaseAnswer === 'n') {
-      if (nextPages) {
+      if (nextPages.peek() !== null) {
         nextPage()
-        lowerCaseAnswer = input();
         } else {
           console.log('Unfortunately you are at the last page');
-          lowerCaseAnswer = input();
         };
     };
 
@@ -118,7 +122,6 @@ while (!finish) {
 
   } else {
     newPage(lowerCaseAnswer);
-    lowerCaseAnswer = input();
   };
 }
 
